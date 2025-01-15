@@ -23,6 +23,10 @@ def calcular():
     except ValueError:
         messagebox.showerror("Error", "Por favor, ingrese un valor numérico válido para el lado.")
 
+def limpiarcamp():
+    entry_lado.delete(0, tk.END)
+    label_resultado.config(text="")
+
 root = tk.Tk()
 root.title("Cálculo de Triángulo Equilátero")
 label_lado = tk.Label(root, text="Valor del lado del triángulo:")
@@ -30,7 +34,9 @@ label_lado.grid(row=0, column=0)
 entry_lado = tk.Entry(root)
 entry_lado.grid(row=0, column=1)
 boton_calcular = tk.Button(root, text="Calcular", command=calcular)
-boton_calcular.grid(row=1, column=0, columnspan=2)
+boton_calcular.grid(row=1, column=0)
+boton_limpiar = tk.Button(root, text="Limpiar", command=limpiarcamp)
+boton_limpiar.grid(row=1, column=1)
 label_resultado = tk.Label(root, text="", justify=tk.LEFT)
 label_resultado.grid(row=2, column=0, columnspan=2)
 root.mainloop()
