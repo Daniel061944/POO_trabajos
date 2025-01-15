@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+
 class Empleado:
     def __init__(self, codigo, nombres, horas_trabajadas, valor_hora, retencion):
         self.codigo = codigo
@@ -15,6 +16,7 @@ class Empleado:
         salario_bruto = self.calcular_salario_bruto()
         descuento = salario_bruto * (self.retencion / 100)
         return salario_bruto - descuento
+
 def calcular():
     try:
         codigo = entry_codigo.get()
@@ -32,6 +34,15 @@ def calcular():
                                 f"Salario neto: ${salario_neto:,.2f}")
     except ValueError:
         messagebox.showerror("Error", "Por favor, ingrese datos válidos.")
+
+def limpiar_campos():
+    entry_codigo.delete(0, tk.END)
+    entry_nombres.delete(0, tk.END)
+    entry_horas_trabajadas.delete(0, tk.END)
+    entry_valor_hora.delete(0, tk.END)
+    entry_retencion.delete(0, tk.END)
+    label_resultado.config(text="")
+
 root = tk.Tk()
 root.title("Cálculo de Salarios")
 label_codigo = tk.Label(root, text="Código del empleado:")
@@ -55,7 +66,9 @@ label_retencion.grid(row=4, column=0)
 entry_retencion = tk.Entry(root)
 entry_retencion.grid(row=4, column=1)
 boton_calcular = tk.Button(root, text="Calcular", command=calcular)
-boton_calcular.grid(row=5, column=0, columnspan=2)
+boton_calcular.grid(row=5, column=0)
+boton_limpiar = tk.Button(root, text="Limpiar", command=limpiar_campos)
+boton_limpiar.grid(row=5, column=1)
 label_resultado = tk.Label(root, text="", justify=tk.LEFT)
 label_resultado.grid(row=6, column=0, columnspan=2)
 root.mainloop()
